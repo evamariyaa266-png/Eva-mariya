@@ -274,9 +274,10 @@ async function startKira() {
 
                     const msgId = msg.key.id || "";
                     
-                    // 🛡️ ANTI-BOT FIX: Ignore common bot IDs
-                    const isFromOtherBot = (msgId.startsWith("BAE5") || msgId.startsWith("3EB0") || msgId.length === 16 || msgId.length === 22 || msgId.startsWith("KIRA")) && !msg.key.fromMe;
-                    if (isFromOtherBot) continue;
+                    // 🛡️ ANTI-BOT FIX: Ignore common bot IDs & Self messages
+                    const isFromOtherBot = (msgId.startsWith("BAE5") || msgId.startsWith("3EB0"));
+                    if (isFromOtherBot || msg.key.fromMe) continue;
+                    
 
                     const botNumber = getBotNumber(sock); 
                     if (!botNumber) continue; 
